@@ -1,22 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // TASK: form that calculates sum of all fields
 // TASK 2: clean up/optimize as much as possible
-class FormCell extends Component {
+class FormCell extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       value: props.value,
     };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { value } = this.props;
-
-    if (prevProps.value !== prevState.value) {
-      this.setState({ value });
-    }
   }
 
   onChange = event => {
@@ -25,10 +17,7 @@ class FormCell extends Component {
     const { value, dataset } = target;
     const { fieldId } = dataset;
 
-    if (!value) {
-      onChange(0, fieldId);
-      return;
-    }
+    this.setState({ value });
 
     onChange(value, fieldId);
   };
